@@ -1,0 +1,39 @@
+
+<div class="row">
+<%= render "books/errors", book: @book %>
+
+<div class="col-sm-3">
+	<%= render 'users/list', book: @book,user: @user %>
+</div>
+
+<div class="col-sm-9">
+<h2>Books</h2>
+<table class="table table-hover table-inverse">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Title</th>
+			<th>Opinion</th>
+		</tr>
+	</thead>
+	<% @books.each do |book| %>
+	<tbody>
+		<tr>
+			<td><% if book.user.profile_image.present? %>
+				<%= attachment_image_tag(book.user, :profile_image, :fill,40, 40 ) %>
+				<% else %>
+				<%=image_tag "no_image.jpg",size:  "40x40" %>
+				<% end %>
+			</td>
+			<td><%= link_to book_path(book) , class: "book_#{book.id}" do %>
+				<%= book.title %>
+					<% end %>
+				</td>
+			<td><%= book.opinion %></td>
+		</tr>
+	</tbody>
+	<% end %>
+</table>
+</div>
+</div>
+</div>

@@ -1,0 +1,17 @@
+
+<%= render "books/errors", book: @user %>
+<h2>User info</h2>
+
+<%= form_for(@user) do |f| %>
+	<%= f.label :name %>
+    <%= f.text_field :name, class: "name"%><br>
+    <br>
+	<%= f.label :image %>
+    <%= f.attachment_field :profile_image, class: "user_image"%>
+    <br>
+    	<%= f.label :intrduction %>
+    <%= f.text_area :introduction, class: "introduction"%><br>
+    <br>
+    <%= f.submit 'Update User' %>
+<% end %>
+</div>

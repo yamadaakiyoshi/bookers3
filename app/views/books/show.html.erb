@@ -1,0 +1,48 @@
+
+<div class="row">
+
+<div class="col-sm-3">
+	<%= render 'users/list', book: @book,user: @user %>
+</div>
+
+<div class="col-sm-9">
+<h2>Book detail</h2>
+<table class="table">
+	<thead>
+		<tr>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+				<td>
+			<%= link_to user_path(@current_book.user_id) , class: "user_#{@user.id}" do %>
+				<% if @current_book.user.profile_image.present? %>
+				<%= attachment_image_tag(@current_book.user, :profile_image, :fill,100, 100 ) %>
+				<% else %>
+				<%=image_tag "no_image.jpg",size:  "100x100" %>
+				<% end %>
+					<br>
+					<%= @current_book.user.name %>
+
+			<% end %>
+				</td>
+			<td><%= link_to book_path(@current_book) , class: "book_#{@current_book.id}" do %>
+				<%= @current_book.title %>
+					<% end %>
+				</td>
+			<td><%= @current_book.opinion %></td>
+			<% if current_user.id == @current_book.user_id %>
+			<!-- ログインしてる人と投稿者のIDを比較 -->
+				<td><%= link_to "Edit",edit_book_path(@current_book.id), class: "btn-sm btn-success edit_book_#{@current_book.id}" %></td>
+				<td><%= link_to "Destroy",book_path(@current_book.id), class: "btn-sm btn-danger destroy_book_#{@current_book.id}",method: :delete, "data-confirm" => "本当に消しますか？"  %></td>
+			<% end %>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+</div>
